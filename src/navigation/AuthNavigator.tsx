@@ -1,10 +1,13 @@
 import React from 'react';
-import {View, Text} from 'react-native';
+import {createNativeStackNavigator} from '@react-navigation/native-stack';
+import SignInScreen from '../screens/SignInScreen';
+
+const Stack = createNativeStackNavigator();
 
 export default function AuthNavigator() {
   return (
-    <View>
-      <Text>Auth Navigator</Text>
-    </View>
+    <Stack.Navigator>
+      <Stack.Screen name="Signin" component={SignInScreen} />
+    </Stack.Navigator>
   );
 }
