@@ -4,13 +4,13 @@ import {scale, ScaledSheet} from 'react-native-size-matters';
 import Feather from 'react-native-vector-icons/Feather';
 import {LightGray, Blue} from '../../constants/color';
 
-interface IProps {
+type TabIconProps = {
   focused: boolean;
   icon: string;
   title: string;
-}
+};
 
-export default function TabIcon({focused, icon, title}: IProps) {
+export default function TabIcon({focused, icon, title}: TabIconProps) {
   return (
     <View style={styles.container}>
       <Feather
