@@ -1,7 +1,7 @@
 import React from 'react';
-import {View, Text, TouchableWithoutFeedback, Image} from 'react-native';
+import {Text, Image, Pressable} from 'react-native';
 import {scale, ScaledSheet} from 'react-native-size-matters';
-import {LightGray_20} from '../../constants/color';
+import {Black, Blue, LightGray_20, White} from '../../constants/color';
 
 type LoginButtonProps = {
   title: string;
@@ -17,24 +17,33 @@ export default function LoginButton({
   icon,
 }: LoginButtonProps) {
   return (
-    <TouchableWithoutFeedback onPress={onPress}>
-      <View style={styles.container}>
-        {/* Social icon */}
-        {isSocial && (
-          <Image
-            source={icon}
-            style={{
-              marginRight: scale(10),
-              width: scale(25),
-              height: scale(25),
-            }}
-          />
-        )}
+    <Pressable
+      onPress={onPress}
+      style={[
+        styles.container,
+        {
+          borderColor: isSocial ? LightGray_20 : 'transparent',
+          backgroundColor: isSocial ? 'transparent' : Blue,
+          padding: isSocial ? scale(8) : scale(10),
+        },
+      ]}>
+      {/* Social icon */}
+      {isSocial && (
+        <Image
+          source={icon}
+          style={{
+            marginRight: scale(10),
+            width: scale(25),
+            height: scale(25),
+          }}
+        />
+      )}
 
-        {/* Button text */}
-        <Text style={styles.titleText}>{title}</Text>
-      </View>
-    </TouchableWithoutFeedback>
+      {/* Button text */}
+      <Text style={[styles.titleText, {color: isSocial ? Black : White}]}>
+        {title}
+      </Text>
+    </Pressable>
   );
 }
 
