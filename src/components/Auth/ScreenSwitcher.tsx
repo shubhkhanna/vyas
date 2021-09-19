@@ -37,6 +37,7 @@ const styles = ScaledSheet.create({
   container: {
     flexDirection: 'row',
     justifyContent: 'center',
+    marginBottom: '20@s',
   },
   titleText: {
     fontSize: '12@s',

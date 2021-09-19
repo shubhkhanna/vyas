@@ -1,14 +1,15 @@
 import React from 'react';
-import {SafeAreaView} from 'react-native';
+import {SafeAreaView, ViewStyle} from 'react-native';
 import {White} from '../../constants/color';
 
 type AppViewProps = {
   children: React.ReactNode;
+  style?: ViewStyle;
 };
 
-export default function AppView({children}: AppViewProps) {
+export default function AppView({children, style}: AppViewProps) {
   return (
-    <SafeAreaView style={{flex: 1, backgroundColor: White}}>
+    <SafeAreaView style={[style, {flex: 1, backgroundColor: White}]}>
       {children}
     </SafeAreaView>
   );

@@ -22,7 +22,7 @@ export default function WelcomeText({titleText, descText}: WelcomeTextProps) {
 
 const styles = ScaledSheet.create({
   container: {
-    marginTop: '20@s',
+    marginTop: '60@s',
   },
   titleText: {
     color: Black,
@@ -33,6 +33,6 @@ const styles = ScaledSheet.create({
   descText: {
     color: LightGray,
     fontSize: '16@s',
-    marginBottom: '20@s',
+    marginBottom: '40@s',
   },
 });
