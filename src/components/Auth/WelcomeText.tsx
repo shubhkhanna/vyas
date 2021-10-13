@@ -1,16 +1,21 @@
 import React from 'react';
-import {View, Text} from 'react-native';
+import {View, Text, ViewStyle} from 'react-native';
 import {ScaledSheet} from 'react-native-size-matters';
 import {Black, LightGray} from '../../constants/color';
 
 type WelcomeTextProps = {
   titleText: string;
   descText: string;
+  viewStyle: ViewStyle;
 };
 
-export default function WelcomeText({titleText, descText}: WelcomeTextProps) {
+export default function WelcomeText({
+  titleText,
+  descText,
+  viewStyle,
+}: WelcomeTextProps) {
   return (
-    <View style={styles.container}>
+    <View style={viewStyle}>
       {/* Title */}
       <Text style={styles.titleText}>{titleText}</Text>
 
@@ -21,9 +26,6 @@ export default function WelcomeText({titleText, descText}: WelcomeTextProps) {
 }
 
 const styles = ScaledSheet.create({
-  container: {
-    marginTop: '60@s',
-  },
   titleText: {
     color: Black,
     fontSize: '24@s',
