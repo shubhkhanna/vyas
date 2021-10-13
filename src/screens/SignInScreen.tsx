@@ -21,6 +21,7 @@ export default function SignInScreen() {
     <AppView style={{paddingHorizontal: scale(15)}}>
       {/* Welcome text */}
       <WelcomeText
+        viewStyle={{marginTop: scale(60)}}
         titleText="Welcome To Vyas!"
         descText="Sign in to your account"
       />
