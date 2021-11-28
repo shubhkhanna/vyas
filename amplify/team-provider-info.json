@@ -10,6 +10,11 @@
       "StackName": "amplify-vyas-dev-151429",
       "StackId": "arn:aws:cloudformation:ap-south-1:936647045114:stack/amplify-vyas-dev-151429/cf83f760-502f-11ec-b4f6-0a9103830cc4",
       "AmplifyAppId": "d22kdh9930mztp"
+    },
+    "categories": {
+      "auth": {
+        "vyas3a83928a": {}
+      }
     }
   }
 }

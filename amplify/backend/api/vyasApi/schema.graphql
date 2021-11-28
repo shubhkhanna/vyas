@@ -1,0 +1,8 @@
+type Courses @model {
+  courseName: String!
+  courseDescription: String!
+  courseLink: String!
+  courseRating: Float
+  courseDuration: String!
+  courseCategory: String!
+}

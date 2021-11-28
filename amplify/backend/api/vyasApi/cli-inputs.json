@@ -1,0 +1,17 @@
+{
+  "version": 1,
+  "serviceConfiguration": {
+    "apiName": "vyasApi",
+    "serviceName": "AppSync",
+    "gqlSchemaPath": "D:\\GitHub\\Vyas\\amplify\\backend\\api\\vyasApi\\schema.graphql",
+    "defaultAuthType": {
+      "mode": "AMAZON_COGNITO_USER_POOLS",
+      "cognitoUserPoolId": "authvyas3a83928a"
+    },
+    "additionalAuthTypes": [
+      {
+        "mode": "AWS_IAM"
+      }
+    ]
+  }
+}
