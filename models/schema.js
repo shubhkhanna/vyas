@@ -27,7 +27,7 @@ export const schema = {
                 "courseLink": {
                     "name": "courseLink",
                     "isArray": false,
-                    "type": "String",
+                    "type": "AWSURL",
                     "isRequired": true,
                     "attributes": []
                 },
@@ -97,5 +97,5 @@ export const schema = {
     },
     "enums": {},
     "nonModels": {},
-    "version": "ff2180126a77677669e1039591348121"
+    "version": "a257e992e1eb94f704128b4b6a4508ef"
 };

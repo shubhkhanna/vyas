@@ -3,7 +3,7 @@
   "serviceConfiguration": {
     "apiName": "vyasApi",
     "serviceName": "AppSync",
-    "gqlSchemaPath": "/tmp/amplify-81a90b94-063a-4825-badf-6defea4842fc/amplify/backend/api/vyasApi/schema.graphql",
+    "gqlSchemaPath": "/tmp/amplify-d7830145-d0c2-4893-a998-281d8fe169d9/amplify/backend/api/vyasApi/schema.graphql",
     "defaultAuthType": {
       "mode": "AMAZON_COGNITO_USER_POOLS",
       "cognitoUserPoolId": "authvyas3a83928a"

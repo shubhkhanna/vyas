@@ -1,7 +1,7 @@
 type Courses @model @auth(rules: [{allow: private}]) {
   courseName: String!
   courseDescription: String!
-  courseLink: String!
+  courseLink: AWSURL!
   courseRating: Float
   courseDuration: String!
   courseCategory: String!
