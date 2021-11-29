@@ -1,4 +1,4 @@
-type Courses @model {
+type Courses @model @auth(rules: [{allow: private}]) {
   courseName: String!
   courseDescription: String!
   courseLink: String!
@@ -6,3 +6,4 @@ type Courses @model {
   courseDuration: String!
   courseCategory: String!
 }
+ 
