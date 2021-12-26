@@ -37,10 +37,11 @@ const styles = ScaledSheet.create({
   container: {
     flexDirection: 'row',
     justifyContent: 'center',
-    marginBottom: '20@s',
+    marginTop: '15@s',
   },
   titleText: {
     fontSize: '12@s',
     color: LightGray,
+    fontWeight: 'bold',
   },
 });

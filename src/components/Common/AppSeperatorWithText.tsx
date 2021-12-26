@@ -1,7 +1,7 @@
 import React from 'react';
 import {View, Text} from 'react-native';
 import {ScaledSheet} from 'react-native-size-matters';
-import {LightGray_20, LightGray_80} from '../../constants/color';
+import {Gray, LightGray_20} from '../../constants/color';
 
 type AppSeperatorWithTextProps = {
   text: string;
@@ -30,7 +30,7 @@ const styles = ScaledSheet.create({
   container: {
     flexDirection: 'row',
     alignItems: 'center',
-    marginBottom: '20@s',
+    marginVertical: '12@s',
   },
   leftLine: {
     flex: 1,
@@ -41,7 +41,8 @@ const styles = ScaledSheet.create({
     width: 'auto',
     fontSize: '14@s',
     textAlign: 'center',
-    color: LightGray_80,
+    color: Gray,
+    fontWeight: 'bold',
     marginHorizontal: '10@s',
   },
   rightLine: {

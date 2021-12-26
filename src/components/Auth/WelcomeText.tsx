@@ -6,7 +6,7 @@ import {Black, LightGray} from '../../constants/color';
 type WelcomeTextProps = {
   titleText: string;
   descText: string;
-  viewStyle: ViewStyle;
+  viewStyle?: ViewStyle;
 };
 
 export default function WelcomeText({
@@ -34,7 +34,7 @@ const styles = ScaledSheet.create({
   },
   descText: {
     color: LightGray,
-    fontSize: '16@s',
-    marginBottom: '40@s',
+    fontSize: '15@s',
+    marginBottom: '10@s',
   },
 });
