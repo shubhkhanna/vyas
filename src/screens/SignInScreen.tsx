@@ -1,96 +1,158 @@
 import React, {useState} from 'react';
+import {Formik} from 'formik';
+import {View, Text, ScrollView, Image, Pressable, Alert} from 'react-native';
 import {scale, ScaledSheet} from 'react-native-size-matters';
+import {KeyboardAwareScrollView} from 'react-native-keyboard-aware-scroll-view';
 import WelcomeText from '../components/Auth/WelcomeText';
-import LoginButton from '../components/Auth/LoginButton';
-import AppView from '../components/Common/AppView';
-import AppSeperatorWithText from '../components/Common/AppSeperatorWithText';
-import FormField from '../components/Auth/FormField';
-import ScreenSwitcher from '../components/Auth/ScreenSwitcher';
-import {useNavigation} from '@react-navigation/core';
+import {Blue, Red, White} from '../constants/color';
+import {signInValidationSchema} from '../helpers/validationSchema';
+import InputLabel from '../components/Auth/InputLabel';
+import Input from '../components/Auth/Input';
+import {useNavigation} from '@react-navigation/native';
 import {forgotPasswordScreen, signUpScreen} from '../navigation/routes';
-import {Pressable, Text} from 'react-native';
-import {LightGray_80} from '../constants/color';
+import LoginButton from '../components/Auth/LoginButton';
+import ScreenSwitcher from '../components/Auth/ScreenSwitcher';
+import AppSeperatorWithText from '../components/Common/AppSeperatorWithText';
 
 export default function SignInScreen() {
   const navigation = useNavigation();
 
-  const [email, setEmail] = useState('');
-  const [password, setPassword] = useState('');
+  const [showPassword, setShowPassword] = useState(false);
 
   return (
-    <AppView style={{paddingHorizontal: scale(15)}}>
-      {/* Welcome text */}
-      <WelcomeText
-        viewStyle={{marginTop: scale(60)}}
-        titleText="Welcome To Vyas!"
-        descText="Sign in to your account"
-      />
+    <KeyboardAwareScrollView
+      contentContainerStyle={{flex: 1, backgroundColor: White}}>
+      <ScrollView
+        bounces={false}
+        showsVerticalScrollIndicator={false}
+        contentContainerStyle={{paddingBottom: scale(20)}}>
+        <View style={styles.container}>
+          {/* Image */}
+          <Image
+            source={require('../assets/img/signin.png')}
+            style={styles.image}
+            resizeMode="cover"
+          />
 
-      {/* Email Field */}
-      <FormField
-        label="Email"
-        iconName="mail"
-        placeHolder="example@gmail.com"
-        value={email}
-        onChangeText={setEmail}
-      />
+          {/* Welcome Text */}
+          <WelcomeText
+            viewStyle={{alignItems: 'center'}}
+            titleText="Welcome To Vyas!"
+            descText="Sign in to your account"
+          />
 
-      {/* Password Field */}
-      <FormField
-        label="Password"
-        iconName="lock"
-        placeHolder="********"
-        isPassword={true}
-        hideIcon="eye-off"
-        value={password}
-        onChangeText={setPassword}
-      />
+          <Formik
+            initialValues={{email: '', password: ''}}
+            validateOnMount={true}
+            onSubmit={values => Alert.alert(JSON.stringify(values))}
+            validationSchema={signInValidationSchema}>
+            {({
+              handleChange,
+              handleBlur,
+              handleSubmit,
+              values,
+              touched,
+              errors,
+              isValid,
+            }) => (
+              <>
+                {/* Email Field */}
+                <InputLabel labelText="Email" />
+                <Input
+                  placeholder="john@gmail.com"
+                  value={values.email}
+                  onBlur={handleBlur('email')}
+                  onChangeText={handleChange('email')}
+                />
 
-      {/* Forgot Password */}
-      <Pressable
-        style={styles.forgotPassContainer}
-        // @ts-ignore
-        onPress={() => navigation.navigate(forgotPasswordScreen)}>
-        <Text style={styles.forgotPassText}>Forgot Password?</Text>
-      </Pressable>
+                {/* Email Field Errors */}
+                {errors.email && touched.email && (
+                  <Text style={styles.errors}>{errors.email}</Text>
+                )}
 
-      {/* Login Button */}
-      <LoginButton
-        title="Log In"
-        onPress={() => console.warn('Email Login!')}
-      />
+                {/* Password Field */}
+                <InputLabel labelText="Password" />
+                <Input
+                  placeholder="joHn@1234"
+                  value={values.password}
+                  onChangeText={handleChange('password')}
+                  onBlur={handleBlur('password')}
+                  isPassword={true}
+                  secureTextEntry={!showPassword}
+                  onPress={() => setShowPassword(!showPassword)}
+                />
 
-      {/* Screen Switcher */}
-      <ScreenSwitcher
-        title="Don't have an account?"
-        linkText="Sign Up"
-        // @ts-ignore
-        onPress={() => navigation.navigate(signUpScreen)}
-      />
+                {/* Password Field Errors */}
+                {errors.password && touched.password && (
+                  <Text style={styles.errors}>{errors.password}</Text>
+                )}
 
-      {/* Seperator */}
-      <AppSeperatorWithText text="OR" />
+                {/* Forgot Password */}
+                <Pressable
+                  style={styles.forgotPassContainer}
+                  // @ts-ignore
+                  onPress={() => navigation.navigate(forgotPasswordScreen)}>
+                  <Text style={styles.forgotPassText}>Forgot Password?</Text>
+                </Pressable>
 
-      {/* Login with Google */}
-      <LoginButton
-        isSocial
-        title="Login with Google"
-        icon={require('../assets/icons/google.png')}
-        onPress={() => console.warn('Google Login!')}
-      />
-    </AppView>
+                {/* Login Button */}
+                <LoginButton
+                  title="Login"
+                  disabled={!isValid}
+                  onPress={handleSubmit}
+                />
+              </>
+            )}
+          </Formik>
+
+          {/* Seperator */}
+          <AppSeperatorWithText text="OR" />
+
+          {/* Login with Google */}
+          <LoginButton
+            isSocial
+            title="Login with Google"
+            icon={require('../assets/icons/google.png')}
+            onPress={() => console.warn('Google Login!')}
+          />
+
+          {/* Screen Switcher */}
+          <ScreenSwitcher
+            title="New to Vyas?"
+            linkText="Register"
+            // @ts-ignore
+            onPress={() => navigation.navigate(signUpScreen)}
+          />
+        </View>
+      </ScrollView>
+    </KeyboardAwareScrollView>
   );
 }
 
 const styles = ScaledSheet.create({
+  container: {
+    paddingHorizontal: '15@s',
+  },
+  image: {
+    width: '160@s',
+    height: '160@s',
+    alignSelf: 'center',
+    marginTop: '5@s',
+  },
+  errors: {
+    color: Red,
+    fontSize: '12@s',
+    fontWeight: '600',
+    marginTop: '5@s',
+    marginLeft: '2@s',
+  },
   forgotPassContainer: {
-    marginBottom: '20@s',
-    marginTop: '-8@s',
+    marginTop: '10@s',
   },
   forgotPassText: {
     textAlign: 'right',
     fontSize: '12@s',
     fontWeight: '700',
-    color: LightGray_80,
+    color: Blue,
   },
 });
