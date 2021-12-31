@@ -1,4 +1,4 @@
-import React, {ChangeEvent} from 'react';
+import {ChangeEvent} from 'react';
 import {View, TextInput, Pressable} from 'react-native';
 import {scale, ScaledSheet} from 'react-native-size-matters';
 import {Black, Blue, Gray_20, LightGray_80} from '../../constants/color';

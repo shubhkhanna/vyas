@@ -1,4 +1,3 @@
-import React from 'react';
 import {Text, Image, Pressable, View} from 'react-native';
 import {scale, ScaledSheet} from 'react-native-size-matters';
 import {

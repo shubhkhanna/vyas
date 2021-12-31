@@ -1,4 +1,4 @@
-import React, {useState} from 'react';
+import {useState} from 'react';
 import {Formik} from 'formik';
 import {View, Text, ScrollView, Image, Pressable, Alert} from 'react-native';
 import {scale, ScaledSheet} from 'react-native-size-matters';

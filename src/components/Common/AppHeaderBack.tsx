@@ -1,4 +1,3 @@
-import React from 'react';
 import {Pressable} from 'react-native';
 import {scale} from 'react-native-size-matters';
 import IonIcons from 'react-native-vector-icons/Ionicons';

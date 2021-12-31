@@ -1,4 +1,3 @@
-import React from 'react';
 import {View, Text} from 'react-native';
 import {ScaledSheet} from 'react-native-size-matters';
 import {Gray, LightGray_20} from '../../constants/color';

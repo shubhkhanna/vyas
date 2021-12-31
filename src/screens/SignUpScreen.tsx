@@ -1,4 +1,4 @@
-import React, {useState} from 'react';
+import {useState} from 'react';
 import {scale} from 'react-native-size-matters';
 import WelcomeText from '../components/Auth/WelcomeText';
 import LoginButton from '../components/Auth/LoginButton';

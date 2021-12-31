@@ -1,4 +1,3 @@
-import React from 'react';
 import {Text, TextStyle} from 'react-native';
 import {ScaledSheet} from 'react-native-size-matters';
 import {Black} from '../../constants/color';

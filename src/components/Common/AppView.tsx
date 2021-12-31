@@ -1,4 +1,3 @@
-import React from 'react';
 import {SafeAreaView, ViewStyle} from 'react-native';
 import {White} from '../../constants/color';
 
