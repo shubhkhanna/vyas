@@ -1,22 +1,44 @@
-import {Pressable} from 'react-native';
-import {scale} from 'react-native-size-matters';
-import IonIcons from 'react-native-vector-icons/Ionicons';
-import {useNavigation} from '@react-navigation/core';
+import {View, Text} from 'react-native';
+import {scale, ScaledSheet} from 'react-native-size-matters';
+import Icon from 'react-native-vector-icons/Ionicons';
 import {Black, White} from '../../constants/color';
 
-export default function AppHeaderBack() {
-  const navigation = useNavigation();
+type HeaderBackProps = {
+  onPress: () => void;
+  title?: string;
+};
 
+const AppHeaderBack = ({onPress, title}: HeaderBackProps) => {
   return (
-    <Pressable
-      style={{backgroundColor: White}}
-      onPress={() => navigation.goBack()}>
-      <IonIcons
-        name="ios-arrow-back"
-        size={scale(22)}
+    <View style={styles.container}>
+      <Icon
+        name="ios-chevron-back"
+        size={scale(26)}
         color={Black}
-        style={{marginTop: scale(15), marginLeft: scale(10)}}
+        onPress={onPress}
       />
-    </Pressable>
+
+      {title && <Text style={styles.title}>{title}</Text>}
+    </View>
   );
-}
+};
+
+export default AppHeaderBack;
+
+const styles = ScaledSheet.create({
+  container: {
+    padding: '10@s',
+    flexDirection: 'row',
+    alignItems: 'center',
+    backgroundColor: White,
+    borderBottomColor: Black,
+    borderBottomWidth: 1,
+  },
+  title: {
+    flex: 1,
+    textAlign: 'center',
+    fontSize: '16@s',
+    color: Black,
+    marginLeft: '-25@s',
+  },
+});
