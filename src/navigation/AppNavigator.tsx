@@ -1,24 +1,30 @@
 import {createBottomTabNavigator} from '@react-navigation/bottom-tabs';
-import HomeScreen from '../screens/HomeScreen';
-import SearchScreen from '../screens/SearchScreen';
-import ProfileScreen from '../screens/ProfileScreen';
-import WatchListScreen from '../screens/WatchListScreen';
+import HomeScreen from '../screens/App/HomeScreen';
+import SearchScreen from '../screens/App/SearchScreen';
+import ProfileScreen from '../screens/App/ProfileScreen';
+import WishListScreen from '../screens/App/WishListScreen';
 import TabIcon from '../components/Tabs/TabIcon';
 import {ScaledSheet} from 'react-native-size-matters';
+import {
+  homeScreen,
+  profileScreen,
+  searchScreen,
+  wishlistScreen,
+} from './routes';
 
 const Tab = createBottomTabNavigator();
 
 export default function AppNavigator() {
   return (
     <Tab.Navigator
-      initialRouteName="Home"
+      initialRouteName={homeScreen}
       screenOptions={{
         headerShown: false,
         tabBarShowLabel: false,
         tabBarStyle: styles.tabBarContainer,
       }}>
       <Tab.Screen
-        name="Home"
+        name={homeScreen}
         component={HomeScreen}
         options={{
           tabBarIcon: ({focused}) => (
@@ -27,7 +33,7 @@ export default function AppNavigator() {
         }}
       />
       <Tab.Screen
-        name="Search"
+        name={searchScreen}
         component={SearchScreen}
         options={{
           tabBarIcon: ({focused}) => (
@@ -36,16 +42,16 @@ export default function AppNavigator() {
         }}
       />
       <Tab.Screen
-        name="Watchlist"
-        component={WatchListScreen}
+        name={wishlistScreen}
+        component={WishListScreen}
         options={{
           tabBarIcon: ({focused}) => (
-            <TabIcon focused={focused} icon="heart" title="Watchlist" />
+            <TabIcon focused={focused} icon="heart" title="Wishlist" />
           ),
         }}
       />
       <Tab.Screen
-        name="Profile"
+        name={profileScreen}
         component={ProfileScreen}
         options={{
           tabBarIcon: ({focused}) => (

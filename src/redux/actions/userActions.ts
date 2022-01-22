@@ -1,5 +1,7 @@
 import {Dispatch} from 'react';
 import axios from '../../helpers/axiosInstance';
+import {getUserData} from '../../helpers/getUserData';
+import {putUserData} from '../../helpers/putUserData';
 import {
   USER_LOGIN_ERROR,
   USER_LOGIN_REQUEST,
@@ -27,8 +29,7 @@ export const LoginUser =
         payload: data?.token,
       });
 
-      // @ts-ignore
-      dispatch(GetUserProfile());
+      await putUserData('@token', data?.token);
     } catch (error: any) {
       console.log(error.response);
       dispatch({
@@ -42,18 +43,16 @@ export const LoginUser =
   };
 
 export const GetUserProfile =
-  () => async (dispatch: Dispatch<UserProfileAction>, getState: any) => {
+  () => async (dispatch: Dispatch<UserProfileAction>) => {
     try {
       dispatch({type: USER_PROFILE_REQUEST});
 
-      const {
-        userLogin: {userToken},
-      } = getState();
+      const token = await getUserData('@token');
 
       const config = {
         headers: {
           'Content-Type': 'application/json',
-          Authorization: `Bearer ${userToken}`,
+          Authorization: token ? `Bearer ${token}` : '',
         },
       };
 
