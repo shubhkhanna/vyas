@@ -31,8 +31,6 @@ const styles = ScaledSheet.create({
     flexDirection: 'row',
     alignItems: 'center',
     backgroundColor: White,
-    borderBottomColor: Black,
-    borderBottomWidth: 1,
   },
   title: {
     flex: 1,
