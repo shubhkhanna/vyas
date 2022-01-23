@@ -1,10 +1,15 @@
-// Login Contants
+// Signup Constants
+export const USER_SIGNUP_REQUEST = 'USER_SIGNUP_REQUEST';
+export const USER_SIGNUP_SUCCESS = 'USER_SIGNUP_SUCCESS';
+export const USER_SIGNUP_ERROR = 'USER_SIGNUP_ERROR';
+
+// Login Constants
 export const USER_LOGIN_REQUEST = 'USER_LOGIN_REQUEST';
 export const USER_LOGIN_SUCCESS = 'USER_LOGIN_SUCCESS';
 export const USER_LOGIN_ERROR = 'USER_LOGIN_ERROR';
 export const USER_LOGOUT = 'USER_LOGOUT';
 
-// Profile Contants
+// Profile Constants
 export const USER_PROFILE_REQUEST = 'USER_PROFILE_REQUEST';
 export const USER_PROFILE_SUCCESS = 'USER_PROFILE_SUCCESS';
 export const USER_PROFILE_ERROR = 'USER_PROFILE_ERROR';

@@ -1,38 +1,36 @@
 import {useEffect, useState} from 'react';
+import {ScrollView, View, Image, Text} from 'react-native';
 import {Formik} from 'formik';
-import {View, Text, ScrollView, Image, Pressable} from 'react-native';
-import {scale, ScaledSheet} from 'react-native-size-matters';
-import {KeyboardAwareScrollView} from 'react-native-keyboard-aware-scroll-view';
 import {useNavigation} from '@react-navigation/native';
-import {NativeStackNavigationProp} from '@react-navigation/native-stack';
+import {KeyboardAwareScrollView} from 'react-native-keyboard-aware-scroll-view';
 import WelcomeText from '../../components/Auth/WelcomeText';
-import {Blue, Red, White} from '../../constants/color';
-import {signInValidationSchema} from '../../helpers/validationSchema';
 import InputLabel from '../../components/Auth/InputLabel';
 import Input from '../../components/Auth/Input';
-import {
-  appNavigator,
-  forgotPasswordScreen,
-  signUpScreen,
-} from '../../navigation/routes';
+import {Red, White} from '../../constants/color';
+import {scale, ScaledSheet} from 'react-native-size-matters';
+import AppHeaderBack from '../../components/Common/AppHeaderBack';
 import LoginButton from '../../components/Auth/LoginButton';
-import ScreenSwitcher from '../../components/Auth/ScreenSwitcher';
-import AppSeperatorWithText from '../../components/Common/AppSeperatorWithText';
+import {appNavigator} from '../../navigation/routes';
+import {NativeStackNavigationProp} from '@react-navigation/native-stack';
 import {useDispatch, useSelector} from 'react-redux';
-import {LoginUser} from '../../redux/actions/userActions';
-import {IUserProfileState} from '../../redux/states';
+import {signUpValidationSchema} from '../../helpers/validationSchema';
+import {SignUpUser} from '../../redux/actions/userActions';
 
-export default function SignInScreen() {
+export default function SignUpScreen() {
   const navigation = useNavigation<NativeStackNavigationProp<any>>();
   const dispatch = useDispatch();
 
   const [showPassword, setShowPassword] = useState(false);
 
-  // Dispatch LoginUser action
-  const handleLogin = (values: {email: string; password: string}) => {
-    const {email, password} = values;
+  // Dispatch SignUpUser action
+  const handleSignUp = (values: {
+    name: string;
+    email: string;
+    password: string;
+  }) => {
+    const {name, email, password} = values;
 
-    dispatch(LoginUser(email, password));
+    dispatch(SignUpUser(name, email, password));
   };
 
   // Get user profile from redux store
@@ -42,7 +40,7 @@ export default function SignInScreen() {
   );
 
   // @ts-ignore
-  const {error} = useSelector(state => state.userLogin);
+  const {error} = useSelector(state => state.userSignUp);
 
   useEffect(() => {
     if (user.email) {
@@ -60,6 +58,7 @@ export default function SignInScreen() {
         bounces={false}
         showsVerticalScrollIndicator={false}
         contentContainerStyle={{paddingBottom: scale(20)}}>
+        <AppHeaderBack onPress={() => navigation.goBack()} />
         <View style={styles.container}>
           {/* Image */}
           <Image
@@ -71,15 +70,15 @@ export default function SignInScreen() {
           {/* Welcome Text */}
           <WelcomeText
             viewStyle={{alignItems: 'center'}}
-            titleText="Welcome To Vyas!"
-            descText="Sign in to your account"
+            titleText="Create an account"
+            descText="Start your career with us"
           />
 
           <Formik
-            initialValues={{email: '', password: ''}}
+            initialValues={{name: '', email: '', password: ''}}
             validateOnMount={true}
-            onSubmit={values => handleLogin(values)}
-            validationSchema={signInValidationSchema}>
+            onSubmit={values => handleSignUp(values)}
+            validationSchema={signUpValidationSchema}>
             {({
               handleChange,
               handleBlur,
@@ -90,6 +89,20 @@ export default function SignInScreen() {
               isValid,
             }) => (
               <>
+                {/* Name Field*/}
+                <InputLabel labelText="Name" />
+                <Input
+                  placeholder="John Doe"
+                  value={values.name}
+                  onBlur={handleBlur('name')}
+                  onChangeText={handleChange('name')}
+                />
+
+                {/* Name Field Errors */}
+                {errors.name && touched.name && (
+                  <Text style={styles.errors}>{errors.name}</Text>
+                )}
+
                 {/* Email Field */}
                 <InputLabel labelText="Email" />
                 <Input
@@ -121,40 +134,15 @@ export default function SignInScreen() {
                   <Text style={styles.errors}>{errors.password}</Text>
                 )}
 
-                {/* Forgot Password */}
-                <Pressable
-                  style={styles.forgotPassContainer}
-                  onPress={() => navigation.navigate(forgotPasswordScreen)}>
-                  <Text style={styles.forgotPassText}>Forgot Password?</Text>
-                </Pressable>
-
-                {/* Login Button */}
+                {/* Signup Button */}
                 <LoginButton
-                  title="Login"
+                  title="Continue"
                   disabled={!isValid}
                   onPress={handleSubmit}
                 />
               </>
             )}
           </Formik>
-
-          {/* Seperator */}
-          <AppSeperatorWithText text="OR" />
-
-          {/* Login with Google */}
-          <LoginButton
-            isSocial
-            title="Login with Google"
-            icon={require('../../assets/icons/google.png')}
-            onPress={() => console.warn('Google Login!')}
-          />
-
-          {/* Screen Switcher */}
-          <ScreenSwitcher
-            title="New to Vyas?"
-            linkText="Register"
-            onPress={() => navigation.navigate(signUpScreen)}
-          />
         </View>
       </ScrollView>
     </KeyboardAwareScrollView>
@@ -169,7 +157,6 @@ const styles = ScaledSheet.create({
     width: '160@s',
     height: '160@s',
     alignSelf: 'center',
-    marginTop: '5@s',
   },
   errors: {
     color: Red,
@@ -178,13 +165,15 @@ const styles = ScaledSheet.create({
     marginTop: '5@s',
     marginLeft: '2@s',
   },
-  forgotPassContainer: {
-    marginTop: '10@s',
-  },
-  forgotPassText: {
-    textAlign: 'right',
-    fontSize: '12@s',
-    fontWeight: '700',
-    color: Blue,
-  },
 });
+
+// <AppView style={{paddingHorizontal: scale(15)}}>
+//   {/* Welcome text */}
+//   <WelcomeText
+//     titleText="Welcome To Vyas!"
+//     descText="Get started!"
+//     viewStyle={{marginTop: scale(15)}}
+//   />
+
+//   {/* Name Field */}
+// </AppView>;

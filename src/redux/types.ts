@@ -5,9 +5,21 @@ import {
   USER_PROFILE_ERROR,
   USER_PROFILE_REQUEST,
   USER_PROFILE_SUCCESS,
+  USER_SIGNUP_ERROR,
+  USER_SIGNUP_REQUEST,
+  USER_SIGNUP_SUCCESS,
 } from './constants/userConstants';
 
 // Compare this snippet from src\redux\actions\userActions.ts
+
+// UserSignUpAction
+export type UserSignUpAction = {
+  type:
+    | typeof USER_SIGNUP_REQUEST
+    | typeof USER_SIGNUP_SUCCESS
+    | typeof USER_SIGNUP_ERROR;
+  payload?: string | null;
+};
 
 // UserLoginAction
 export type UserLoginAction = {

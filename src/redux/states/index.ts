@@ -1,5 +1,19 @@
 // Compare this snippet from src\redux\reducers\userReducer.ts:
 
+// User SignUp State type
+export interface IUserSignUpState {
+  loading: boolean;
+  userToken: string | null;
+  error: string | null;
+}
+
+// User SignUp Initial State
+export const userSignUpInitialState: IUserSignUpState = {
+  loading: false,
+  userToken: null,
+  error: null,
+};
+
 // User Login State type
 export interface IUserLoginState {
   loading: boolean;

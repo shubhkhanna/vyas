@@ -1,8 +1,13 @@
 import {createStore, applyMiddleware, combineReducers} from 'redux';
 import thunk from 'redux-thunk';
-import {userLoginReducer, userProfileReducer} from './reducers/userReducers';
+import {
+  userLoginReducer,
+  userProfileReducer,
+  userSignUpReducer,
+} from './reducers/userReducers';
 
 const reducer = combineReducers({
+  userSignUp: userSignUpReducer,
   userLogin: userLoginReducer,
   userProfile: userProfileReducer,
 });

@@ -9,8 +9,48 @@ import {
   USER_PROFILE_ERROR,
   USER_PROFILE_REQUEST,
   USER_PROFILE_SUCCESS,
+  USER_SIGNUP_ERROR,
+  USER_SIGNUP_REQUEST,
+  USER_SIGNUP_SUCCESS,
 } from '../constants/userConstants';
-import {UserLoginAction, UserProfileAction} from '../types';
+import {UserLoginAction, UserProfileAction, UserSignUpAction} from '../types';
+
+export const SignUpUser =
+  (name: string, email: string, password: string) =>
+  async (dispatch: Dispatch<UserSignUpAction>) => {
+    try {
+      dispatch({type: USER_SIGNUP_REQUEST});
+
+      const config = {
+        headers: {'Content-Type': 'application/json'},
+      };
+
+      const {data} = await axios.post(
+        '/user/register',
+        {name, email, password},
+        config,
+      );
+
+      dispatch({
+        type: USER_SIGNUP_SUCCESS,
+        payload: data?.token,
+      });
+
+      await putUserData('@token', data?.token);
+
+      // @ts-ignore
+      dispatch(GetUserProfile());
+    } catch (error: any) {
+      console.log(error.response.data.message);
+      dispatch({
+        type: USER_SIGNUP_ERROR,
+        payload:
+          error.response && error.response.data.message
+            ? error.response.data.message
+            : error.message,
+      });
+    }
+  };
 
 export const LoginUser =
   (email: String, password: String) =>
@@ -30,8 +70,11 @@ export const LoginUser =
       });
 
       await putUserData('@token', data?.token);
+
+      // @ts-ignore
+      dispatch(GetUserProfile());
     } catch (error: any) {
-      console.log(error.response);
+      console.log(error.response.data.message);
       dispatch({
         type: USER_LOGIN_ERROR,
         payload:
@@ -71,7 +114,7 @@ export const GetUserProfile =
         },
       });
     } catch (error: any) {
-      console.log(error.response);
+      console.log(error.response.data.message);
       dispatch({
         type: USER_PROFILE_ERROR,
         payload:
