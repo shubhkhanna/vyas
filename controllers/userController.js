@@ -36,12 +36,11 @@ const registerUser = asyncHandler(async (req, res) => {
 
   // Sending response
   res.status(201).json({
-    resStatus: {
-      statusCode: 1,
-      message: "User Created Successfully!",
-      errorType: null,
-    },
-    resData: {
+    user: {
+      id: newUser._id,
+      name: newUser.name,
+      email: newUser.email,
+      isAdmin: newUser.isAdmin,
       token: generateToken(newUser._id),
     },
   });
@@ -75,7 +74,13 @@ const loginUser = asyncHandler(async (req, res) => {
 
   // Sending response
   res.json({
-    token: generateToken(user._id),
+    user: {
+      id: user._id,
+      name: user.name,
+      email: user.email,
+      isAdmin: user.isAdmin,
+      token: generateToken(user._id),
+    },
   });
 });
 

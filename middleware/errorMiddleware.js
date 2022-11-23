@@ -3,16 +3,9 @@ const { Logger } = require("../helpers/logger");
 const notFound = (req, res, next) => {
   Logger.error(`${req.method} - Not Found! - ${req.originalUrl} - 404`);
 
-  res.status(404).json({
-    resStatus: {
-      statusCode: 0,
-      message: "",
-      errorType: "Not found!",
-    },
-    resData: {},
-  });
+  res.status(404);
 
-  next();
+  next(error);
 };
 
 const handleError = (error, req, res, next) => {
@@ -23,12 +16,7 @@ const handleError = (error, req, res, next) => {
   );
 
   res.status(statusCode).json({
-    resStatus: {
-      statusCode: 0,
-      message: "",
-      errorType: error.message,
-    },
-    resData: {},
+    message: error.message,
   });
 };
 
